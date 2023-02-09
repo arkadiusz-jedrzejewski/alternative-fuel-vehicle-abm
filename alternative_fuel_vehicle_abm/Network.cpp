@@ -11,7 +11,7 @@ Network::Network(int N, std::string name, const std::vector<Car*>& cars)
 	carEngineHistogram = std::vector<int>(4, 0);
 	carEngineHistogram[3] = N;
 
-	seed = std::chrono::system_clock::now().time_since_epoch().count();
+	seed = 10;// std::chrono::system_clock::now().time_since_epoch().count();
 	generator = std::mt19937_64(seed);
 	std::uniform_int_distribution<int> distrib(0, 10);
 	std::uniform_real_distribution<double> distribR(0, 1);

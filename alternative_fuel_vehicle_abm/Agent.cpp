@@ -298,6 +298,68 @@ Agent::Agent(int index, std::mt19937_64& generator)
 	bev_susceptibilities = get_susceptibilities(EngineType::BEV, generator);
 }
 
+Agent::Agent(int index, bool heterogeneous_m_influence, bool heterogeneous_g_influence, bool heterogeneous_l_influence, bool heterogeneous_driving_patterns, std::mt19937_64& generator, const std::vector<double>& dps)
+{
+	this->index = index;
+	this->car = NULL;  // NULL: agent does not have a car
+
+	if (heterogeneous_m_influence)
+	{
+		// set susceptibilities based on the empirical distributions
+		hev_susceptibilities.push_back(marketing_susceptibility(EngineType::HEV, generator));
+		phev_susceptibilities.push_back(marketing_susceptibility(EngineType::PHEV, generator));
+		bev_susceptibilities.push_back(marketing_susceptibility(EngineType::BEV, generator));
+	}
+	else
+	{
+		// set mean values for all susceptibilities ([0]: marketing, [1]: global influence, [2] local influence)
+		this->hev_susceptibilities.push_back(2.14);
+		this->phev_susceptibilities.push_back(2.07);
+		this->bev_susceptibilities.push_back(2.09);
+	}
+
+	if (heterogeneous_g_influence)
+	{
+		// set susceptibilities based on the empirical distributions
+		hev_susceptibilities.push_back(global_influence_susceptibility(EngineType::HEV, generator));
+		phev_susceptibilities.push_back(global_influence_susceptibility(EngineType::PHEV, generator));
+		bev_susceptibilities.push_back(global_influence_susceptibility(EngineType::BEV, generator));
+	}
+	else
+	{
+		// set mean values for all susceptibilities ([0]: marketing, [1]: global influence, [2] local influence)
+		this->hev_susceptibilities.push_back(1.96);
+		this->phev_susceptibilities.push_back(1.81);
+		this->bev_susceptibilities.push_back(1.98);
+	}
+
+	if (heterogeneous_l_influence)
+	{
+		// set susceptibilities based on the empirical distributions
+		hev_susceptibilities.push_back(local_influence_susceptibility(EngineType::HEV, generator));
+		phev_susceptibilities.push_back(local_influence_susceptibility(EngineType::PHEV, generator));
+		bev_susceptibilities.push_back(local_influence_susceptibility(EngineType::BEV, generator));
+	}
+	else
+	{
+		// set mean values for all susceptibilities ([0]: marketing, [1]: global influence, [2] local influence)
+		this->hev_susceptibilities.push_back(2.86);
+		this->phev_susceptibilities.push_back(2.58);
+		this->bev_susceptibilities.push_back(2.59);
+	}
+
+	if (heterogeneous_driving_patterns)
+	{
+		// set driving pattern based on the empirical distribution
+		this->set_driving_pattern(dps, generator);
+	}
+	else
+	{
+		// set the mean value of driving pattern
+		this->dp = std::accumulate(dps.begin(), dps.end(), 0.0) / dps.size();
+	}
+}
+
 Agent::Agent(int index, bool heterogeneous_susceptibilities, bool heterogeneous_driving_patterns, std::mt19937_64& generator, const std::vector<double>& dps)
 {
 	this->index = index;
@@ -334,7 +396,7 @@ Agent::Agent(int index, bool heterogeneous_susceptibilities, bool heterogeneous_
 	else
 	{
 		// set the mean value of driving pattern
-		this->dp = std::accumulate(dps.begin(), dps.end(), 0.0) / dps.size();;
+		this->dp = std::accumulate(dps.begin(), dps.end(), 0.0) / dps.size();
 	}
 }
 
