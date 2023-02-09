@@ -298,6 +298,62 @@ Agent::Agent(int index, std::mt19937_64& generator)
 	bev_susceptibilities = get_susceptibilities(EngineType::BEV, generator);
 }
 
+Agent::Agent(int index, bool heterogeneous_hev_susceptibilities, bool heterogeneous_phev_susceptibilities, bool heterogeneous_bev_susceptibilities, bool heterogeneous_driving_patterns, std::mt19937_64& generator, const std::vector<double>& dps)
+{
+	this->index = index;
+	this->car = NULL;  // NULL: agent does not have a car
+
+	if (heterogeneous_hev_susceptibilities)
+	{
+		// set susceptibilities based on the empirical distributions
+		hev_susceptibilities = get_susceptibilities(EngineType::HEV, generator);
+	}
+	else
+	{
+		// set mean values for all susceptibilities ([0]: marketing, [1]: global influence, [2] local influence)
+		this->hev_susceptibilities.push_back(2.14);
+		this->hev_susceptibilities.push_back(1.96);
+		this->hev_susceptibilities.push_back(2.86);
+	}
+
+	if (heterogeneous_phev_susceptibilities)
+	{
+		// set susceptibilities based on the empirical distributions
+		phev_susceptibilities = get_susceptibilities(EngineType::PHEV, generator);
+	}
+	else
+	{
+		// set mean values for all susceptibilities ([0]: marketing, [1]: global influence, [2] local influence)
+		this->phev_susceptibilities.push_back(2.07);
+		this->phev_susceptibilities.push_back(1.81);
+		this->phev_susceptibilities.push_back(2.58);
+	}
+
+	if (heterogeneous_bev_susceptibilities)
+	{
+		// set susceptibilities based on the empirical distributions
+		bev_susceptibilities = get_susceptibilities(EngineType::BEV, generator);
+	}
+	else
+	{
+		// set mean values for all susceptibilities ([0]: marketing, [1]: global influence, [2] local influence)
+		this->bev_susceptibilities.push_back(2.09);
+		this->bev_susceptibilities.push_back(1.98);
+		this->bev_susceptibilities.push_back(2.59);
+	}
+
+	if (heterogeneous_driving_patterns)
+	{
+		// set driving pattern based on the empirical distribution
+		this->set_driving_pattern(dps, generator);
+	}
+	else
+	{
+		// set the mean value of driving pattern
+		this->dp = std::accumulate(dps.begin(), dps.end(), 0.0) / dps.size();
+	}
+}
+
 Agent::Agent(int index, bool heterogeneous_susceptibilities, bool heterogeneous_driving_patterns, std::mt19937_64& generator, const std::vector<double>& dps)
 {
 	this->index = index;
@@ -334,7 +390,7 @@ Agent::Agent(int index, bool heterogeneous_susceptibilities, bool heterogeneous_
 	else
 	{
 		// set the mean value of driving pattern
-		this->dp = std::accumulate(dps.begin(), dps.end(), 0.0) / dps.size();;
+		this->dp = std::accumulate(dps.begin(), dps.end(), 0.0) / dps.size();
 	}
 }
 
@@ -443,6 +499,7 @@ void Agent::printPreferences() const
 		std::cout << susceptibility << "\t";
 	}
 	std::cout << std::endl;
+	std::cout << dp << std::endl;
 }
 
 bool Agent::connected(const Agent* agent) const

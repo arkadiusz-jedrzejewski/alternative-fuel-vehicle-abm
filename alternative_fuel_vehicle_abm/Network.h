@@ -18,6 +18,15 @@ protected:
 	std::mt19937_64 generator;
 	Network(int N, std::string name, const std::vector<Car*>& cars);
 	Network(
+		int N,
+		std::string name,
+		bool heterogeneous_hev_susceptibilities,
+		bool heterogeneous_phev_susceptibilities,
+		bool heterogeneous_bev_susceptibilities,
+		bool heterogeneous_driving_patterns,
+		const std::vector<Car*>& cars,
+		const std::vector<double>& dps);
+	Network(
 		int N, 
 		std::string name, 
 		bool heterogeneous_susceptibilities, 
