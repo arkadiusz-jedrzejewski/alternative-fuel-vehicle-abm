@@ -499,6 +499,7 @@ void Agent::printPreferences() const
 		std::cout << susceptibility << "\t";
 	}
 	std::cout << std::endl;
+	std::cout << dp << std::endl;
 }
 
 bool Agent::connected(const Agent* agent) const
