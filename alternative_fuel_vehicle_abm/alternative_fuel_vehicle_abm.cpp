@@ -147,7 +147,6 @@ int main(int argc, char** argv)
     {
         while (std::getline(dp_file, line))
         {
-            double var;
             dp_tab.push_back(std::stod(line));
         }
         dp_file.close();
@@ -184,7 +183,7 @@ int main(int argc, char** argv)
         double beta = atof(argv[15]); // rewiring probability
     
         //network = new WattsStrogatz(N, k, beta, heterogeneous_susceptibilities, heterogeneous_driving_patterns, cars, dp_tab);
-        network = new WattsStrogatz(N, k, beta, heterogeneous_m_influence, heterogeneous_g_influence, heterogeneous_l_influence, heterogeneous_driving_patterns, cars, dp_tab);
+        network = new WattsStrogatz(N, k, beta, heterogeneous_hev_susceptibilities, heterogeneous_phev_susceptibilities, heterogeneous_bev_susceptibilities, heterogeneous_driving_patterns, cars, dp_tab);
     }
      
     std::vector<double> ads = { h_hev, h_phev, h_bev };
