@@ -3,6 +3,46 @@
 
 
 SquareLattice::SquareLattice(
+	int L,
+	bool heterogeneous_m_influence,
+	bool heterogeneous_g_influence,
+	bool heterogeneous_l_influence,
+	bool heterogeneous_driving_patterns,
+	const std::vector<Car*>& cars,
+	const std::vector<double>& dps) :
+	Network(L* L, "SL", heterogeneous_m_influence, heterogeneous_g_influence, heterogeneous_l_influence, heterogeneous_driving_patterns, cars, dps)
+{
+	this->L = L;
+
+	for (int i = 0; i < L; i++)
+	{
+		for (int j = 0; j < L; j++)
+		{
+			if (j == L - 1 && i != L - 1)
+			{
+				agents[i * L + j]->connect(agents[i * L]);
+				agents[i * L + j]->connect(agents[(i + 1) * L + j]);
+			}
+			else if (i == L - 1 && j != L - 1)
+			{
+				agents[i * L + j]->connect(agents[i * L + j + 1]);
+				agents[i * L + j]->connect(agents[j]);
+			}
+			else if (i == L - 1 && j == L - 1)
+			{
+				agents[i * L + j]->connect(agents[i * L]);
+				agents[i * L + j]->connect(agents[j]);
+			}
+			else
+			{
+				agents[i * L + j]->connect(agents[i * L + j + 1]);
+				agents[i * L + j]->connect(agents[(i + 1) * L + j]);
+			}
+		}
+	}
+}
+
+SquareLattice::SquareLattice(
 	int L, 
 	bool heterogeneous_susceptibilities, 
 	bool heterogeneous_driving_patterns, 
