@@ -4,13 +4,13 @@
 
 SquareLattice::SquareLattice(
 	int L,
-	bool heterogeneous_m_influence,
-	bool heterogeneous_g_influence,
-	bool heterogeneous_l_influence,
+	bool heterogeneous_hev_susceptibilities,
+	bool heterogeneous_phev_susceptibilities,
+	bool heterogeneous_bev_susceptibilities,
 	bool heterogeneous_driving_patterns,
 	const std::vector<Car*>& cars,
 	const std::vector<double>& dps) :
-	Network(L* L, "SL", heterogeneous_m_influence, heterogeneous_g_influence, heterogeneous_l_influence, heterogeneous_driving_patterns, cars, dps)
+	Network(L* L, "SL", heterogeneous_hev_susceptibilities, heterogeneous_phev_susceptibilities, heterogeneous_bev_susceptibilities, heterogeneous_driving_patterns, cars, dps)
 {
 	this->L = L;
 

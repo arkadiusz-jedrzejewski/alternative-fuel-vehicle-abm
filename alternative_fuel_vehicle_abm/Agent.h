@@ -20,7 +20,7 @@ public:
 	Agent();
 	Agent(int index);
 	Agent(int index, std::mt19937_64& generator);
-	Agent(int index, bool heterogeneous_m_influence, bool heterogeneous_g_influence, bool heterogeneous_l_influence, bool heterogeneous_driving_patterns, std::mt19937_64& generator, const std::vector<double>& dps);
+	Agent(int index, bool heterogeneous_hev_susceptibilities, bool heterogeneous_phev_susceptibilities, bool heterogeneous_bev_susceptibilities, bool heterogeneous_driving_patterns, std::mt19937_64& generator, const std::vector<double>& dps);
 	Agent(int index, bool heterogeneous_susceptibilities, bool heterogeneous_driving_patterns, std::mt19937_64& generator, const std::vector<double>& dps);
 	Agent(Car* car);
 

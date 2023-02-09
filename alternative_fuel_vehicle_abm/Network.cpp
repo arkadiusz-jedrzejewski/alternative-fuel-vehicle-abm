@@ -40,9 +40,9 @@ Network::Network(int N, std::string name, const std::vector<Car*>& cars)
 Network::Network(
 	int N,
 	std::string name,
-	bool heterogeneous_m_influence,
-	bool heterogeneous_g_influence,
-	bool heterogeneous_l_influence,
+	bool heterogeneous_hev_susceptibilities,
+	bool heterogeneous_phev_susceptibilities,
+	bool heterogeneous_bev_susceptibilities,
 	bool heterogeneous_driving_patterns,
 	const std::vector<Car*>& cars,
 	const std::vector<double>& dps)
@@ -60,7 +60,7 @@ Network::Network(
 	agents = std::vector<Agent*>(N);
 	for (int i = 0; i < N; i++)
 	{
-		agents[i] = new Agent(i, heterogeneous_m_influence, heterogeneous_g_influence, heterogeneous_l_influence, heterogeneous_driving_patterns, generator, dps);
+		agents[i] = new Agent(i, heterogeneous_hev_susceptibilities, heterogeneous_phev_susceptibilities, heterogeneous_bev_susceptibilities, heterogeneous_driving_patterns, generator, dps);
 	}
 }
 

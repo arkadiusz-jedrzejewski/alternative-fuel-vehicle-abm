@@ -20,9 +20,9 @@ protected:
 	Network(
 		int N,
 		std::string name,
-		bool heterogeneous_m_influence,
-		bool heterogeneous_g_influence,
-		bool heterogeneous_l_influence,
+		bool heterogeneous_hev_susceptibilities,
+		bool heterogeneous_phev_susceptibilities,
+		bool heterogeneous_bev_susceptibilities,
 		bool heterogeneous_driving_patterns,
 		const std::vector<Car*>& cars,
 		const std::vector<double>& dps);

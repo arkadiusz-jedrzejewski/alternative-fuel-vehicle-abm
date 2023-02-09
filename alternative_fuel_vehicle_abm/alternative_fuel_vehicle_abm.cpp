@@ -156,30 +156,35 @@ int main(int argc, char** argv)
     
     // model parameters
     std::string network_type = argv[1]; // network type: "SL" - square lattice, "WS" - Watts Strogatz network
-    bool heterogeneous_susceptibilities = atoi(argv[2]); // true: agets have heterogeneous susceptibilities; false: all agents have the same susceptibilities
-    bool heterogeneous_driving_patterns = atoi(argv[3]); // true: agets have heterogeneous driving patterns; false: all agents have the same driving pattern
-    double alpha_phev = atof(argv[4]); // calibration parameter; responsible for refueling effect (REF) for PHEV
-    double alpha_bev = atof(argv[5]); // calibration parameter; responsible for refueling effect (REF) for BEV
-    double h_hev = atof(argv[6]); // advertisement strength of HEV 
-    double h_phev = atof(argv[7]); // advertisement strength of PHEV
-    double h_bev = atof(argv[8]); // advertisement strength of BEV
-    int time_horizon = atoi(argv[9]); // simulation length in Monte Carlo steps
-    std::string fileName = argv[10]; // path to or name of an output file
+    bool heterogeneous_hev_susceptibilities = atoi(argv[2]); // true: agets have heterogeneous HEV susceptibilities; false: all agents have the same susceptibilities
+    bool heterogeneous_phev_susceptibilities = atoi(argv[3]); // true: agets have heterogeneous PHEV susceptibilities; false: all agents have the same susceptibilities
+    bool heterogeneous_bev_susceptibilities = atoi(argv[4]); // true: agets have heterogeneous BEV susceptibilities; false: all agents have the same susceptibilities
+    //bool heterogeneous_susceptibilities = atoi(argv[2]); // true: agets have heterogeneous susceptibilities; false: all agents have the same susceptibilities
+    bool heterogeneous_driving_patterns = atoi(argv[5]); // true: agets have heterogeneous driving patterns; false: all agents have the same driving pattern
+    double alpha_phev = atof(argv[6]); // calibration parameter; responsible for refueling effect (REF) for PHEV
+    double alpha_bev = atof(argv[7]); // calibration parameter; responsible for refueling effect (REF) for BEV
+    double h_hev = atof(argv[8]); // advertisement strength of HEV 
+    double h_phev = atof(argv[9]); // advertisement strength of PHEV
+    double h_bev = atof(argv[10]); // advertisement strength of BEV
+    int time_horizon = atoi(argv[11]); // simulation length in Monte Carlo steps
+    std::string fileName = argv[12]; // path to or name of an output file
     
     Network* network = NULL;
     if (network_type == "SL")
     {
-        int L = atoi(argv[11]); // linera lattice size (N = L x L: number of agents)
+        int L = atoi(argv[13]); // linera lattice size (N = L x L: number of agents)
     
-        network = new SquareLattice(L, heterogeneous_susceptibilities, heterogeneous_driving_patterns, cars, dp_tab);
+        //network = new SquareLattice(L, heterogeneous_susceptibilities, heterogeneous_driving_patterns, cars, dp_tab);
+        network = new SquareLattice(L, heterogeneous_hev_susceptibilities, heterogeneous_phev_susceptibilities, heterogeneous_bev_susceptibilities, heterogeneous_driving_patterns, cars, dp_tab);
     }
     else if (network_type == "WS")
     {
-        int N = atoi(argv[11]); // number of agents (nodes)
-        int k = atoi(argv[12]); // average node degree (k must be divisible by 2)
-        double beta = atof(argv[13]); // rewiring probability
+        int N = atoi(argv[13]); // number of agents (nodes)
+        int k = atoi(argv[14]); // average node degree (k must be divisible by 2)
+        double beta = atof(argv[15]); // rewiring probability
     
-        network = new WattsStrogatz(N, k, beta, heterogeneous_susceptibilities, heterogeneous_driving_patterns, cars, dp_tab);
+        //network = new WattsStrogatz(N, k, beta, heterogeneous_susceptibilities, heterogeneous_driving_patterns, cars, dp_tab);
+        network = new WattsStrogatz(N, k, beta, heterogeneous_m_influence, heterogeneous_g_influence, heterogeneous_l_influence, heterogeneous_driving_patterns, cars, dp_tab);
     }
      
     std::vector<double> ads = { h_hev, h_phev, h_bev };
