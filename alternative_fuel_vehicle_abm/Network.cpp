@@ -38,6 +38,33 @@ Network::Network(int N, std::string name, const std::vector<Car*>& cars)
 }
 
 Network::Network(
+	int N,
+	std::string name,
+	bool heterogeneous_m_influence,
+	bool heterogeneous_g_influence,
+	bool heterogeneous_l_influence,
+	bool heterogeneous_driving_patterns,
+	const std::vector<Car*>& cars,
+	const std::vector<double>& dps)
+{
+	this->N = N;
+	this->name = name;
+	carEngineHistogram = std::vector<int>(4, 0);
+	carEngineHistogram[3] = N;
+
+	seed = std::chrono::system_clock::now().time_since_epoch().count();
+	generator = std::mt19937_64(seed);
+	std::uniform_int_distribution<int> distrib(0, 10);
+	std::uniform_real_distribution<double> distribR(0, 1);
+
+	agents = std::vector<Agent*>(N);
+	for (int i = 0; i < N; i++)
+	{
+		agents[i] = new Agent(i, heterogeneous_m_influence, heterogeneous_g_influence, heterogeneous_l_influence, heterogeneous_driving_patterns, generator, dps);
+	}
+}
+
+Network::Network(
 	int N, 
 	std::string name, 
 	bool heterogeneous_susceptibilities, 
