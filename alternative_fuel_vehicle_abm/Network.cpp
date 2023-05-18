@@ -81,7 +81,7 @@ Network::Network(
 	generator = std::mt19937_64(seed);
 	std::uniform_int_distribution<int> distrib(0, 10);
 	std::uniform_real_distribution<double> distribR(0, 1);
-
+	//
 	agents = std::vector<Agent*>(N);
 	for (int i = 0; i < N; i++)
 	{
@@ -247,40 +247,11 @@ void Network::printCarEngineTypes() const
 
 void Network::printCarEngineTypeDistirbution() const
 {
-	//std::vector<double> distribution = std::vector<double>(4, 0);
-	//for (const Agent* agent : agents)
-	//{
-	//	switch (agent->getCarEngineType())
-	//	{
-	//	case EngineType::HEV:
-	//		distribution[0]++;
-	//		break;
-	//	case EngineType::PHEV:
-	//		distribution[1]++;
-	//		break;
-	//	case EngineType::BEV:
-	//		distribution[2]++;
-	//		break;
-	//	case EngineType::NONE:
-	//		distribution[3]++;
-	//		break;
-	//	}
-	//}
-	//for (double& prob : distribution)
-	//{
-	//	prob /= N;
-	//}
-	//std::cout << 
-	//	EngineType::HEV << ": " << distribution[0] << " " <<
-	//	EngineType::PHEV << ": " << distribution[1] << " " << 
-	//	EngineType::BEV << ": " << distribution[2] << " " << 
-	//	EngineType::NONE << ": " << distribution[3] << " " << std::endl;
 	std::cout <<
 		EngineType::HEV << ": " << carEngineHistogram[0] / (double) N << " " <<
 		EngineType::PHEV << ": " << carEngineHistogram[1] / (double) N << " " <<
 		EngineType::BEV << ": " << carEngineHistogram[2] / (double) N << " " <<
 		EngineType::NONE << ": " << carEngineHistogram[3] / (double) N << " " << std::endl;
-	//std::cout << "//////\n";
 }
 
 void Network::saveCarEngineTypeDistribution(std::fstream& plik) const
