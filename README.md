@@ -1,4 +1,6 @@
 # alternative-fuel-vehicle-abm
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.12935296.svg)](https://doi.org/10.5281/zenodo.12935296)
+
 The code of an agent-based model (ABM) designed for studing the diffusion of alternative fuel vehicles (AFVs).
 
 Repository with python scripts to run the model: [https://github.com/arkadiusz-jedrzejewski/alternative-fuel-vehicle-abm](https://github.com/arkadiusz-jedrzejewski/alternative-fuel-vehicle-abm-py)
