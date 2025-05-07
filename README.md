@@ -1,7 +1,14 @@
 # alternative-fuel-vehicle-abm
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.12935296.svg)](https://doi.org/10.5281/zenodo.12935296)
 
-The code of an agent-based model (ABM) designed for studing the diffusion of alternative fuel vehicles (AFVs).
+This repository contains the C++ implementation of an empirically grounded agent-based model (ABM) designed to study the diffusion of alternative fuel vehicles (AFVs). 
+It was used in the paper:
+
+> **Everyone is Different, But Does It Matter?**  
+> *The role of heterogeneity in empirically grounded agent-based models of alternative fuel vehicles diffusion*  
+> A. Jędrzejewski, A. Kowalska-Pyzalska, J. Pawłowski, K. Sznajd-Weron.  
+> _Operations Research and Decisions_, 2025, Vol. 35(1), pp. 45–80.  
+> [DOI: 10.37190/ord250103](https://doi.org/10.37190/ord250103)
 
 Repository with python scripts to run the model: [https://github.com/arkadiusz-jedrzejewski/alternative-fuel-vehicle-abm](https://github.com/arkadiusz-jedrzejewski/alternative-fuel-vehicle-abm-py)
 
