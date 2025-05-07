@@ -10,6 +10,7 @@ It was used in the paper:
 > _Operations Research and Decisions_, 2025, Vol. 35(1), pp. 45–80.  
 > [DOI: 10.37190/ord250103](https://doi.org/10.37190/ord250103)
 
+## Related Repository
 Repository with python scripts to run the model: [https://github.com/arkadiusz-jedrzejewski/alternative-fuel-vehicle-abm](https://github.com/arkadiusz-jedrzejewski/alternative-fuel-vehicle-abm-py)
 
 ## Citation
